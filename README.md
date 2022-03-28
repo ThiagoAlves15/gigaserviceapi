@@ -23,4 +23,4 @@ Things you may want to cover:
 
 - ...
 
-- rails g scaffold User name:jsonb gender:string location:json email:string birthday:timestamp registered:timestamp phone:string cellphone:string picture:json naturalization:string
+- rails g scaffold User name:jsonb gender:string email:string picture:json naturalization:string

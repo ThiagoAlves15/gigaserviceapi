@@ -1,25 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: 
+  name:
   gender: MyString
-  location: 
   email: MyString
-  birthday: 2022-03-28 08:47:42
-  registered: 2022-03-28 08:47:42
-  phone: MyString
-  cellphone: MyString
-  picture: 
+  picture:
   naturalization: MyString
 
 two:
-  name: 
+  name:
   gender: MyString
-  location: 
   email: MyString
-  birthday: 2022-03-28 08:47:42
-  registered: 2022-03-28 08:47:42
-  phone: MyString
-  cellphone: MyString
-  picture: 
+  picture:
   naturalization: MyString
