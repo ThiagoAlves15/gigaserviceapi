@@ -24,3 +24,5 @@ Things you may want to cover:
 - ...
 
 - rails g scaffold User name:jsonb gender:string email:string picture:json naturalization:string
+
+- sudo service postgresql start

@@ -1,0 +1,17 @@
+@import "bootstrap";
+
+.users-desktop {
+  display: table;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.users-mobile {
+  display: none;
+
+  @media (max-width: 800px) {
+    display: block;
+  }
+}

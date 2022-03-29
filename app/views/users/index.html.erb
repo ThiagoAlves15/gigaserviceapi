@@ -1,16 +1,40 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Users</h1>
 
-<%= button_to "Get some users", api_v1_users_path, method: :post %>
+<%= page_entries_info @users %>
+<%= paginate @users %>
 
 <div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+  <table class="table table-striped table-bordered table-hover users-desktop">
+    <thead class="thead-dark">
+      <tr>
+        <th>Picture</th>
+        <th>Full Name</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>Naturalization</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= image_tag url_for(user.images.first), class: "rounded" %></td>
+          <td>
+            <%= link_to "#{user.name["title"]} #{user.name["first"]} #{user.name["last"]}", user %>
+          </td>
+          <td><%= user.gender %></td>
+          <td><%= user.email %></td>
+          <td><%= user.naturalization %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="users-mobile">
+    <% @users.each do |user| %>
+      <%= render user %>
+    <% end %>
+  </div>
 </div>
 
-<%= link_to "New user", new_user_path %>
+<%= paginate @users %>

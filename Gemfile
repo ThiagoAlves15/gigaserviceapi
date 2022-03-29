@@ -44,6 +44,9 @@ gem "bootsnap", require: false
 
 gem "http"
 gem "down"
+gem "kaminari"
+gem "sprockets-rails"
+gem "bootstrap", "~> 5.1.3"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
