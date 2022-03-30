@@ -47,7 +47,6 @@ gem "down"
 gem "kaminari"
 gem "bootstrap", "~> 5.1.3"
 gem "activestorage-validator"
-gem "ruby-vips"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
