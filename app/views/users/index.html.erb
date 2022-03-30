@@ -4,6 +4,11 @@
   <%= page_entries_info @users %>
 </div>
 
+<%= form_tag(users_path, method: 'get', class: "d-flex mb-3") do %>
+  <%= text_field_tag(:search, params[:search], placeholder: "Search user name", class: "form-control me-2") %>
+  <%= submit_tag("Search", name: nil, class: "btn btn-outline-success") %>
+<% end %>
+
 <%= render "user_pagination" %>
 
 <div id="users">
