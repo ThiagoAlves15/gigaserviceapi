@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    @users = User.order(:name).page(params[:page])
+    @users = User.order(:email).page(params[:page])
   end
 
   # GET /users/1 or /users/1.json
@@ -21,10 +21,12 @@ class UsersController < ApplicationController
 
   # POST /users or /users.json
   def create
-    @user = User.new(user_params)
+    params = user_params
+    @user = User.new(user_data(params))
+    @user.avatar.attach(params[:avatar])
 
     respond_to do |format|
-      if @user.save
+      if @user.save && @user.avatar.attached?
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
@@ -37,7 +39,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      params = user_params
+
+      @user.avatar.attach(params[:avatar])
+
+      if @user.update(user_data(params)) && @user.avatar.attached?
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -52,7 +58,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_url, notice: "User was successfully deleted." }
       format.json { head :no_content }
     end
   end
@@ -68,9 +74,24 @@ class UsersController < ApplicationController
       params.require(:user).permit(
         :gender,
         :email,
-        :nat,
-        name: %i[title first last],
-        picture: %i[large medium thumbnail]
+        :naturalization,
+        :avatar,
+        :title,
+        :first_name,
+        :last_name
       )
+    end
+
+    def user_data(params)
+      {
+        name: {
+          "title": params[:title],
+          "first": params[:first_name],
+          "last": params[:last_name],
+        },
+        email: params[:email],
+        gender: params[:gender],
+        naturalization: params[:naturalization],
+      }
     end
 end

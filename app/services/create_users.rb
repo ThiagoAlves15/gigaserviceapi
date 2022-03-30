@@ -1,24 +1,35 @@
 class CreateUsers < ApplicationService
-  class CreateUserFailed < StandardError; end
+  class CreateUsersFailed < StandardError; end
 
   def initialize(users)
     @users = users
   end
 
   def call
+    raise CreateUsersFailed unless valid_payload?
+
     @users["results"].each do |user_data|
       params = user_parameters(user_data)
       user = User.new(params)
-      download_and_attach_pictures(user)
+      download_and_attach_avatar(user)
       user.save!
     end
-  # rescue StandardError
-    # Rails.logger.error("Could not create user")
 
-    # raise CreateUserFailed
+    Result.new(true, nil)
+  rescue StandardError
+    Rails.logger.error("Could not create user")
+
+    raise CreateUsersFailed
   end
 
   private
+
+  def valid_payload?
+    @users["results"].present? &&
+    @users["results"].all? { |user_data|
+      user_data.assert_valid_keys("name", "gender", "email", "nat", "picture")
+    }
+  end
 
   def user_parameters(user_data)
     {
@@ -30,22 +41,19 @@ class CreateUsers < ApplicationService
     }
   end
 
-  def download_and_attach_pictures(user)
-    user.picture.each do |_img_size, link|
-      file_name = generate_file_name
-      download_image = Down.download(link)
-      # FileUtils.mv(download_image.path, "./storage/#{file_name}")
+  def download_and_attach_avatar(user)
+    file_name = generate_file_name
+    download_image = Down.download(user.picture["large"])
 
-      user.images.attach(
-        io: File.open(download_image.path),
-        filename: file_name,
-        content_type: 'image/jpeg'
-      )
-    end
+    user.avatar.attach(
+      io: File.open(download_image.path),
+      filename: file_name,
+      content_type: 'image/jpeg'
+    )
   end
 
   def generate_file_name
-    "#{random_seed}#{just_numbers_from_time}"
+    "#{random_seed}#{just_numbers_from_time}.jpg"
   end
 
   def random_seed

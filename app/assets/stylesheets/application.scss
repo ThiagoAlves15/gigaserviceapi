@@ -1,6 +1,6 @@
 @import "bootstrap";
 
-.users-desktop {
+.users-list__desktop {
   display: table;
 
   @media (max-width: 800px) {
@@ -8,10 +8,35 @@
   }
 }
 
-.users-mobile {
+.users-list__mobile {
   display: none;
 
   @media (max-width: 800px) {
     display: block;
   }
+}
+
+.users-pagination__desktop {
+  display: block;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
+.users-pagination__mobile {
+  display: none;
+
+  @media (max-width: 800px) {
+    display: block;
+  }
+}
+
+.form-image {
+  width: 200px;
+}
+
+.form-image-field {
+  display: flex;
+  align-items: flex-end;
 }

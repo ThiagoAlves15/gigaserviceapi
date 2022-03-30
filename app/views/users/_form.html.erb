@@ -11,37 +11,48 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :avatar, style: "display: block" %>
-    <%= form.file_field :avatar %>
+  <div class="mb-4">
+    <%= form.label :avatar, class: "form-label" %>
+    <div class="form-image-field">
+      <% if user.avatar.attached? %>
+        <%= image_tag user.avatar, class: "form-image me-4" %>
+      <% end %>
+
+      <%= form.file_field :avatar, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, value: "#{ @user.name['title'] if @user.name && @user.name['title'] }", class: "form-control", placeholder: "Ex: Mr, Ms, Sir, Madam, ..." %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :first_name, class: "form-label" %>
+    <%= form.text_field :first_name, value: "#{ @user.name['first'] if @user.name && @user.name['first'] }", class: "form-control", placeholder: "Type your first name" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :last_name, class: "form-label" %>
+    <%= form.text_field :last_name, value: "#{ @user.name['last'] if @user.name && @user.name['last'] }", class: "form-control", placeholder: "Type your last name" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :gender, class: "form-label" %>
+    <%= form.text_field :gender, class: "form-control", placeholder: "Ex: Male, female, other, ..." %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.text_field :email, class: "form-control", placeholder: "example@example.com" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :naturalization, class: "form-label" %>
+    <%= form.text_field :naturalization, class: "form-control", placeholder: "Ex: BR, RU, EUA, ..." %>
   </div>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :gender, style: "display: block" %>
-    <%= form.text_field :gender %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :picture, style: "display: block" %>
-    <%= form.text_field :picture %>
-  </div>
-
-  <div>
-    <%= form.label :naturalization, style: "display: block" %>
-    <%= form.text_field :naturalization %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

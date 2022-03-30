@@ -1,0 +1,17 @@
+<div id="<%= dom_id user %>">
+  <div class="card mb-4">
+    <%= image_tag user.avatar, class: "card-img-top user-image" %>
+
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= link_to "#{user.name["title"]} #{user.name["first"]} #{user.name["last"]}", user %>
+      </h5>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><%= user.gender %></li>
+      <li class="list-group-item"><%= user.email %></li>
+      <li class="list-group-item"><%= user.naturalization %></li>
+    </ul>
+  </div>
+</div>

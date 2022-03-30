@@ -1,0 +1,17 @@
+<span class="users-pagination__desktop">
+  <%= paginate @users %>
+</span>
+
+<span class="users-pagination__mobile">
+  <nav class="pagination" role="navigation" aria-label="pager">
+    <ul class="pagination">
+      <li class="page-item">
+        <%= link_to_previous_page @users, 'Previous Page', class: 'prev page-link' %>
+      </li>
+
+      <li class="page-item">
+        <%= link_to_next_page @users, 'Next Page', class: 'next page-link' %>
+      </li>
+    </ul>
+  </nav>
+</span>
