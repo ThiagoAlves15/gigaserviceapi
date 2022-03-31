@@ -11,6 +11,7 @@
 /log/*
 /tmp/*
 /coverage/*
+/coverage/
 !/log/.keep
 !/tmp/.keep
 

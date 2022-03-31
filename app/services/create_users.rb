@@ -8,7 +8,7 @@ class CreateUsers < ApplicationService
   def call
     raise CreateUsersFailed unless valid_payload?
 
-    @users["results"].each do |user_data|
+    @users['results'].each do |user_data|
       params = user_parameters(user_data)
       user = User.new(params)
       download_and_attach_avatar(user)
@@ -17,7 +17,7 @@ class CreateUsers < ApplicationService
 
     Result.new(true, nil)
   rescue StandardError
-    Rails.logger.error("Could not create user")
+    Rails.logger.error('Could not create user')
 
     raise CreateUsersFailed
   end
@@ -25,25 +25,25 @@ class CreateUsers < ApplicationService
   private
 
   def valid_payload?
-    @users["results"].present? &&
-    @users["results"].all? { |user_data|
-      user_data.assert_valid_keys("name", "gender", "email", "nat", "picture")
-    }
+    @users['results'].present? &&
+      @users['results'].all? do |user_data|
+        user_data.assert_valid_keys('name', 'gender', 'email', 'nat', 'picture')
+      end
   end
 
   def user_parameters(user_data)
     {
-      name: user_data["name"],
-      gender: user_data["gender"],
-      email: user_data["email"],
-      naturalization: user_data["nat"],
-      picture: user_data["picture"],
+      name: user_data['name'],
+      gender: user_data['gender'],
+      email: user_data['email'],
+      naturalization: user_data['nat'],
+      picture: user_data['picture']
     }
   end
 
   def download_and_attach_avatar(user)
     file_name = generate_file_name
-    download_image = Down.download(user.picture["large"])
+    download_image = Down.download(user.picture['large'])
 
     user.avatar.attach(
       io: File.open(download_image.path),

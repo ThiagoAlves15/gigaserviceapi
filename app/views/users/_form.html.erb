@@ -14,7 +14,7 @@
   <div class="mb-4">
     <%= form.label :avatar, class: "form-label" %>
     <div class="form-image-field">
-      <% if user.avatar.attached? %>
+      <% if user.attached? %>
         <%= image_tag user.avatar, class: "form-image me-4" %>
       <% end %>
 

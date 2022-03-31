@@ -3,7 +3,7 @@ module Api
     class UsersBatchController < ApplicationController
       def create
         if User.count > 100
-          redirect_to users_path, notice: "User limit reached."
+          redirect_to users_path, notice: 'User limit reached.'
           return
         end
 
@@ -21,7 +21,7 @@ module Api
         result = CreateUsers.call(response.parse) if response.status.success?
 
         if result.success?
-          redirect_back_or_to users_path, status: 303, notice: "New users added."
+          redirect_back_or_to users_path, status: 303, notice: 'New users added.'
         else
           redirect_back_or_to users_path, status: :unprocessable_entity, notice: result.error
         end

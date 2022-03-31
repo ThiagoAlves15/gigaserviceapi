@@ -7,12 +7,12 @@ FactoryBot.define do
     naturalization { Faker::Nation.nationality }
 
     after(:build) do |user|
-      avatar_path = Rails.root.join("spec", "fixtures", "files", "roboto.jpg")
+      avatar_path = Rails.root.join('spec', 'fixtures', 'files', 'roboto.jpg')
 
       user.avatar.attach(
         io: File.open(avatar_path),
-        filename: "avatar.jpg",
-        content_type: "image/jpeg"
+        filename: 'avatar.jpg',
+        content_type: 'image/jpeg'
       )
     end
   end
